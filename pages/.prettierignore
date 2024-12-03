@@ -1,0 +1,5 @@
+.next
+#por padrão a partir da versao 3.0.0 o prettier ignora o conteudo do .gitignore, 
+#prettier ignores files ignored by .gitignore by default. If you want the old behavior(only ignore files ignored by .prettierignore), use
+#
+#prettier . --write --ignore-path=.prettierignore
