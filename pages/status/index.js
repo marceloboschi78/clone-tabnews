@@ -10,7 +10,7 @@ function useGetStatusValues() {
   const { isLoading, data } = swr("/api/v1/status", fetchAPI, {
     refreshInterval: 2000,
   });
-
+  console.log(data);
   let updatedAtText = "Carregando...";
   let database = "Carregando...";
 
@@ -18,9 +18,14 @@ function useGetStatusValues() {
     updatedAtText = new Date(data.updated_at).toLocaleString("pt-BR");
     database = (
       <>
-        <li>Postgres versão: {database.version}</li>
-        <li>Máximo de conexões simultâneas: {database.max_connections}</li>
-        <li>Conexões abertas: {database.opened_connections}</li>
+        <li>Postgres versão: {data.dependencies.database.version}</li>
+        <li>
+          Máximo de conexões simultâneas:{" "}
+          {data.dependencies.database.max_connections}
+        </li>
+        <li>
+          Conexões abertas: {data.dependencies.database.opened_connections}
+        </li>
       </>
     );
   }
