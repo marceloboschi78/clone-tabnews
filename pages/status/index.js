@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import swr from "swr";
 
 async function fetchAPI(key) {
   const response = await fetch(key);
@@ -6,8 +6,8 @@ async function fetchAPI(key) {
   return responseBody;
 }
 
-function getStatusValues() {
-  const { isLoading, data } = useSWR("/api/v1/status", fetchAPI, {
+function useGetStatusValues() {
+  const { isLoading, data } = swr("/api/v1/status", fetchAPI, {
     refreshInterval: 2000,
   });
 
@@ -28,7 +28,7 @@ function getStatusValues() {
 }
 
 function DatabaseStatus() {
-  const { database } = getStatusValues();
+  const { database } = useGetStatusValues();
 
   return (
     <div>
@@ -39,7 +39,7 @@ function DatabaseStatus() {
 }
 
 function UpdatedAt() {
-  const { updatedAtText } = getStatusValues();
+  const { updatedAtText } = useGetStatusValues();
 
   return (
     <div>
